@@ -46,18 +46,32 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
 
 ![Creación de un nuevo repositorio en GitHub](imagenes/02_practica_01.png)
 
-### 4.2. Conectar repositorio con SonarCloud
+### 4.2. Crear un proyecto de análisis y asociarlo a un repositorio de GitHub desde SonarCloud
 1. En SonarCloud, dentro de tu organización, selecciona **Analyze new project**.  
-2. Escoge el repositorio creado en GitHub.  
-3. SonarCloud configurará el proyecto y proporcionará un **SONAR_TOKEN** para autenticar los análisis.  
-4. En el repositorio de GitHub:
-   - Ve a **Settings > Secrets and variables > Actions**.
-   - Crea un secreto llamado `SONAR_TOKEN` con el valor generado en el paso 3.
-5. Añade un workflow de GitHub Actions:
-   - En la carpeta `.github/workflows`, crea `sonarcloud.yml` con la configuración del análisis (Maven o Gradle).
-   - Cada push o PR ejecutará automáticamente un análisis y publicará los resultados en SonarCloud.
+2. Escoge el repositorio creado en GitHub y completa los pasos del proceso en las páginas sucesivas.  
 
-![Configuración de un workflow en GitHub Actions](imagenes/captura_github_actions.png)
+![Creación de un proyecto de análisis de SonarCloud](imagenes/03_practica_01.png)
+
+
+### 4.3. Configurar el proyecto de SonarCloud para vincularlo con las acciones del repositorio de GitHub
+1. Configurar el proyecto utilizando las acciones de GitHub. Este procedimiento proporcionará un **SONAR_TOKEN** para autenticar los análisis de las acciones.  
+2. En el repositorio de GitHub:
+   - Ve a **Settings > Secrets and variables > Actions**.
+   - Crea un secreto llamado `SONAR_TOKEN` con el valor generado en el paso 1.
+5. Añade un workflow de GitHub Actions:
+   - Crear una carpeta que contenga el proyecto local (en nuestro ordenador)
+   - Iniciar git en la carpeta local del proyecto y crear el archivo `build.yml` en la carpeta del proyecto local `.github/workflows`:
+   ```Shell
+   cd RUTA_CARPETA_LOCAL_PROYECTO
+   git init
+   mkdir .github
+   mkdir .github/workflows
+   touch .github/workflows/build.yml
+   ```
+   - Copiar, en el archivo `.github/workflows/build.yml`, el contenido indicado, para un proyecto Maven, en el paso 2 de la configuración de SonarCloud (ver imagen siguiente)
+
+  ![Configuración de un workflow en GitHub Actions](imagenes/04_practica_01.png)
+
 ---
 
 ## 3. Plugin de SonarQube para Eclipse
