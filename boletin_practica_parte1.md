@@ -84,6 +84,45 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
    git push -u origin main //Se solicitará el nombre de usuario y el token (clásico) de desarrollo de github.
    ```
    [Crear un token (clásico) de desarrollo de github](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+
+---
+
+## 5. Creación de un proyecto Maven en Eclipse
+- Descarga en la carpeta de nuetro proyecto local la carpeta que se encuentra en este repositorio nombrada como `p1-calso-25-26`. Esta carpeta contiene los archivos de proyecto Maven con el que trabajeremos en la práctica.
+- Crea een la carpeta de tu repositorio local (no en la del proyecto Maven) el fichero `.gitignore` con el siguiente contenido mínimo:
+```
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+/target/
+/.metadata/
+/.DS_Store
+
+# virtual machine crash logs
+hs_err_pid*
+replay_pid*
+```
+- Abre el IDE de Eclipse y selecciona como workspace la carpeta de tu repositorio local (la carpeta que contiene `p1-calso-25-26`)
+- Importa el proyecto Maven que se encuentra en la carpeta `p1-calso-25-26`
+
 ---
 
 ## 3. Plugin de SonarQube para Eclipse
