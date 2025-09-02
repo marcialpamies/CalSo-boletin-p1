@@ -53,7 +53,7 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
 ![Creación de un proyecto de análisis de SonarCloud](imagenes/03_practica_01.png)
 
 
-### 4.3. Configurar el proyecto de SonarCloud para vincularlo con las acciones del repositorio de GitHub
+### 4.3. Configurar el proyecto de SonarCloud y vincularlo con las acciones del repositorio de GitHub
 1. Configurar el proyecto utilizando las acciones de GitHub. Este procedimiento proporcionará un **SONAR_TOKEN** para autenticar los análisis de las acciones.  
 2. En el repositorio de GitHub:
    - Ve a **Settings > Secrets and variables > Actions**.
@@ -61,7 +61,7 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
 5. Añade un workflow de GitHub Actions:
    - Crear una carpeta que contenga el proyecto local (en nuestro ordenador)
    - Iniciar git en la carpeta local del proyecto y crear el archivo `build.yml` en la carpeta del proyecto local `.github/workflows`:
-   ```Shell
+   ```shell
    cd RUTA_CARPETA_LOCAL_PROYECTO
    git init
    mkdir .github
@@ -72,6 +72,17 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
 
   ![Configuración de un workflow en GitHub Actions](imagenes/04_practica_01.png)
 
+  - Realizar el primer commit a nuestro repositorio remoto:
+   ```shell
+   cd RUTA_CARPETA_LOCAL_PROYECTO
+   git config user.name "USERNAME" //Si no se tiene configurado
+   git config user.email "USER@EMAIL" //Si no se tiene configurado
+   git remote add origin https://github.com/... // Sustituir por la dirección de nuesttro repositorio.
+   git branch -M main
+   git add .
+   git commit -m "Commit Inicial"
+   git push -u origin main //Se solicitará el nombre de usuario y el [token (clásico) de desarrollo de github](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+   ```
 ---
 
 ## 3. Plugin de SonarQube para Eclipse
