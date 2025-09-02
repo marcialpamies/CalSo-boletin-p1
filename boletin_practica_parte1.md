@@ -75,14 +75,15 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
   - Realizar el primer commit a nuestro repositorio remoto:
    ```shell
    cd RUTA_CARPETA_LOCAL_PROYECTO
-   git config user.name "USERNAME" //Si no se tiene configurado
-   git config user.email "USER@EMAIL" //Si no se tiene configurado
+   git config user.name "USERNAME" //Si no se tiene configurado.
+   git config user.email "USER@EMAIL" //Si no se tiene configurado.
    git remote add origin https://github.com/... // Sustituir por la dirección de nuesttro repositorio.
    git branch -M main
    git add .
    git commit -m "Commit Inicial"
-   git push -u origin main //Se solicitará el nombre de usuario y el [token (clásico) de desarrollo de github](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+   git push -u origin main //Se solicitará el nombre de usuario y el token (clásico) de desarrollo de github.
    ```
+   [Crear un token (clásico) de desarrollo de github](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 ---
 
 ## 3. Plugin de SonarQube para Eclipse
