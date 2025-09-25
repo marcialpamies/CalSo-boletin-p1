@@ -292,7 +292,101 @@ De este modo, Eclipse descarga el **Quality Profile** activo en SonarCloud y lo 
 ---
 ## 7. Forma de trabajo
 
-Cada miembro del grupo trabajará sobre su propia rama del repositorio de trabajo del grupo. Tened en cuenta que cada rama deberá tener su propio build.yml para indicar la versión que se deberá ejecutar al hacer push a sus respectivas ramas. En función del análisis inicial del código el grupo de trabajo se repartirá el código para resolver y documentar las acciones para resolver las disconformidades que se encuentran en el código. Cada resolución conllevará un commit a la rama correspondiente.
+Cada miembro del grupo trabajará sobre su propia rama del repositorio de trabajo del grupo. Tened en cuenta que para ejecutar el workflow al hacer `push` o `pull request` en cada rama (por defecto sólo estará en la rama `main`) hay que indicar en el build.yml que así lo queremos. En el siguiente código mínimo se indica la forma:
 
+```
+on:
+  push:
+    branches:
+      - main
+      - rama_user_A
+      - rama_user_B
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - rama_user_A
+      - rama_user_B
+```
+
+En función del análisis inicial del código el grupo de trabajo se repartirá el código de análisis y se procederá a el análisis de la resolución de disconformidades y su documentación, que se incorporará en un fichero `.md`. 
+
+Cada participante, cuando realice las acciones para resolver una disconformidad realizará un commit a su repositorio local y al concluir cada sesión de trabajo realizarán un push a su rama. Cuando ambos miembros concluiyan con la resolución de todas las disconformidades que aparecen en el código procederán a establecer los `pull request` necesarios para unificar todos las acciones en la rama `maiin` donde se configurará la entrega final.
+
+IMPORTANTE: para la entrega de la práctica se deben haber resuelto la totaidad de las disconformidades y haber realizado la documentación de la disconformidad encontrada, su descripción, su localización en el código original y las moodificaciones realizadas para su solución (No está permitida la eliminación de funcionalidad para la corrección de disconformidades). Toda esta documentación de organizará en uno o varios archivos `.md`  de la rama `main` que se organizarán según las clases del proyecto original.
+
+## 8. Ejercicios a realizar
+
+Para consolidar los conocimientos de la práctica, cada grupo deberá completar los siguientes ejercicios:
+
+### 1. Configuración inicial
+
+- Crear la cuenta en GitHub y SonarCloud, vinculando una organización y un repositorio privado del grupo.
+- Configurar el build.yml en la carpeta .github/workflows del repositorio para ejecutar el análisis de SonarCloud sobre el proyecto Maven proporcionado.
+- Verificar que el análisis se ejecuta correctamente al realizar un primer push a la rama main.
+- En el archivo `README.md`de la rama `main` deberá constar el nombre y correo electrónico de todos los miembros del grupo.
+- Incorporar al profesor como usuario con los permisos adecuados pen el repositorio y en la organización de SonarCloud (La cuenta de usuario que hay que añadir aparece en el enunciado de la tarea en el Aula Virtual)
+
+### 2. Integración en Eclipse
+
+- Importar el proyecto Maven (p1-calso) en Eclipse seleccionando como workspace la carpeta local del repositorio.
+- Instalar y configurar el plugin SonarQube for IDE, vinculando el proyecto local con el proyecto remoto de SonarCloud.
+- Realizar un análisis local con SonarQube for IDE y comprobar que los issues detectados coinciden con los mostrados en la interfaz de SonarCloud.
+
+### 3. Gestión de ramas
+
+- Crear una rama individual por cada miembro del grupo (ej. rama_user_A, rama_user_B).
+- Configurar el build.yml para que también ejecute análisis en esas ramas.
+- Cada miembro trabajará en su rama para resolver un subconjunto de disconformidades detectadas en el análisis inicial.
+
+### 4. Resolución de disconformidades
+
+- Seleccionar varias disconformidades detectadas por SonarCloud (bugs, code smells, vulnerabilidades).
+- Modificar el código en Eclipse para resolverlas, asegurando que no se elimina funcionalidad.
+- Realizar commit y push a la rama personal, verificando que SonarCloud muestra la disminución de disconformidades en los análisis posteriores.
+
+### 5. Documentación de las correcciones
+
+- Crear un archivo Markdown (docs/disconformidades.md o varios organizados por clase) en el repositorio donde se documente cada disconformidad:
+   - Localización: archivo y línea donde aparece.
+   - Descripción: texto del issue detectado.
+   - Modificación aplicada: cambios realizados en el código para resolverla.
+- Cada miembro debe documentar las disconformidades que haya corregido.
+
+### 6. Integración final
+
+- Abrir pull requests desde las ramas individuales hacia main.
+- Resolver posibles conflictos y fusionar los cambios cuando el análisis en SonarCloud sea satisfactorio.
+- Verificar en la rama main que se han resuelto todas las disconformidades detectadas originalmente.
+- Asegurar que los ficheros .md de documentación estén completos y actualizados en la rama main.
+
+# 9. Entregables
+Al entregar la tarea en el aula virtual se indicará el enlace al repositorio de GitHub que contendrá, en la rama main: el proyecto completo, la documentación solicitada en el archivo `.md`, la identificación de los miembros del grupo en el archivo `README.md` y, en las ramas personales de cada participante la información sobre los commits/PR realizados por cada participante junto con su versión de la documentación.
+Fecha de entrega: 10/11/2025
+
+# 10. Evaluación
+
+**IMPORTANTE:** Si el profesor no pudiera acceder al repositorio o al proyecto de SonarCloud desde la cuenta indicada en el enunciado de la tarea asociada a la práctica en el aula virtual, se considerará la práctica como no superada con puntuación 0 puntos.
+
+La práctica se considerará superada si se cumplen los siguientes criterios:
+
+#### 1. Configuración y entorno (2 puntos)
+- [ ] Se ha creado correctamente la organización en SonarCloud vinculada con GitHub.  
+- [ ] El proyecto Maven se ha importado en Eclipse y compila sin errores.  
+- [ ] El workflow de GitHub Actions (`build.yml`) ejecuta los análisis automáticamente al hacer *push* en las ramas configuradas.  
+
+#### 2. Análisis estático (3 puntos)
+- [ ] Se han detectado y documentado las disconformidades iniciales en el código.  
+- [ ] El análisis de SonarCloud muestra métricas de *bugs* vulnerabilidades y *code smells*.  
+
+#### 3. Resolución de disconformidades (3 puntos)
+- [ ] Cada miembro del grupo ha trabajado en su rama individual.  
+- [ ] Se han realizado modificaciones en el código resolviendo las disconformidades sin eliminar funcionalidad.  
+- [ ] Los *pull requests* se han integrado correctamente en `main`, reduciendo a cero las disconformidades reportadas.  
+
+#### 4. Documentación (2 puntos)
+- [ ] Se han creado archivos `.md` con la documentación de cada disconformidad.  
+- [ ] Cada documento incluye: localización, descripción y modificación aplicada.  
+- [ ] La documentación final está organizada y accesible en la rama `main`.  
 
 
