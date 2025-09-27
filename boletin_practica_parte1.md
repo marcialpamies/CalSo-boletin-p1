@@ -1,4 +1,31 @@
 # Práctica 1: Revisiones estáticas de código con SonarCloud, SonarQube y GitHub
+
+## Índice
+
+- [1. Objetivo](#1-objetivo)
+- [2. Introducción a las revisiones estáticas de código](#2-introducción-a-las-revisiones-estáticas-de-código)
+- [3. SonarQube Cloud: concepto y creación de una cuenta gratuita](#3-sonarqube-cloud-concepto-y-creación-de-una-cuenta-gratuita)
+  - [3.1. Creación de cuenta en SonarQube Cloud](#31-creación-de-cuenta-en-sonarqube-cloud)
+- [4. Creación de un repositorio en GitHub para la práctica y conexión con SonarCloud](#4-creación-de-un-repositorio-en-github-para-la-práctica-y-conexión-con-sonarcloud)
+  - [4.1. Crear repositorio vacío en GitHub](#41-crear-repositorio-vacío-en-github)
+  - [4.2. Crear un proyecto de análisis y asociarlo a un repositorio de GitHub desde SonarCloud](#42-crear-un-proyecto-de-análisis-y-asociarlo-a-un-repositorio-de-github-desde-sonarcloud)
+  - [4.3. Configurar el proyecto de SonarCloud y vincularlo con las acciones del repositorio de GitHub](#43-configurar-el-proyecto-de-sonarcloud-y-vincularlo-con-las-acciones-del-repositorio-de-github)
+- [5. Creación de un proyecto Maven en Eclipse](#5-creación-de-un-proyecto-maven-en-eclipse)
+- [6. Plugin de SonarQube para Eclipse](#6-plugin-de-sonarqube-para-eclipse)
+  - [6.1. Instalación del plugin](#61-instalación-del-plugin)
+  - [6.2. Conexión con SonarCloud](#62-conexión-con-sonarcloud)
+- [7. Forma de trabajo](#7-forma-de-trabajo)
+- [8. Ejercicios a realizar](#8-ejercicios-a-realizar)
+  - [1. Configuración inicial](#1-configuración-inicial)
+  - [2. Integración en Eclipse](#2-integración-en-eclipse)
+  - [3. Gestión de ramas](#3-gestión-de-ramas)
+  - [4. Resolución de disconformidades](#4-resolución-de-disconformidades)
+  - [5. Documentación de las correcciones](#5-documentación-de-las-correcciones)
+  - [6. Integración final](#6-integración-final)
+- [9. Entregables](#9-entregables)
+- [10. Evaluación](#10-evaluación)
+
+
 ## 1. Objetivo
 Introducir el uso de herramientas de análisis estático de código y su integración en el flujo de desarrollo de software, utilizando SonarQube Cloud como plataforma principal.
 
@@ -21,11 +48,11 @@ La automatización de este proceso es posible gracias a herramientas como **Sona
 - Analizar proyectos directamente conectados a repositorios de GitHub, GitLab, Azure DevOps o Bitbucket. En la versión gratuita con limitaciones
 - Definir **Quality Profiles** (conjuntos de reglas activas) y **Quality Gates** (criterios de aceptación). En la versión gratuita se pueden definir pero el uso de los perfiles y criterios modificados solo está permitido si se adopta la versión de pago.
 - Generar paneles de control con métricas de calidad, seguridad y cobertura de tests. Incluido en la versión gratuita.
-- Integrar resultados de los análisis en los flujos de integración continua. Incluido en la ersión gratuita con limitaciones
+- Integrar resultados de los análisis en los flujos de integración continua. Incluido en la versión gratuita con limitaciones
 
 ### 3.1. Creación de cuenta en SonarQube Cloud
-1. Si no se dispone de una, crearemos un cuenta de **GitHub**, usando la cuenta de correo del alumno que ejerce como coordinador del grupo. Accedemos a la cuenta de github. 
-2. Con la cuenta de github abieta se accede a [https://sonarcloud.io/login](https://sonarcloud.io/login).  
+1. Si no se dispone de una, crearemos una cuenta de **GitHub**, usando la cuenta de correo del alumno que ejerce como coordinador del grupo. Accedemos a la cuenta de github. 
+2. Con la cuenta de GitHub abieta se accede a [https://sonarcloud.io/login](https://sonarcloud.io/login).  
 3. Inicia sesión usando tu cuenta de **GitHub**.  
 4. Autoriza a SonarCloud a acceder a tus repositorios. Durante este procedimiento importaremos una organización que coincidirá con el nombre del usuario propietario de la cuenta de GitHub utilizada.
 
@@ -78,7 +105,7 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
    cd RUTA_CARPETA_LOCAL_PROYECTO
    git config user.name "USERNAME" //Si no se tiene configurado.
    git config user.email "USER@EMAIL" //Si no se tiene configurado.
-   git remote add origin https://github.com/... // Sustituir por la dirección de nuesttro repositorio.
+   git remote add origin https://github.com/... // Sustituir por la dirección de nuestro repositorio.
    git add .
    git commit -m "Commit Inicial"
    git branch -M main
@@ -90,7 +117,7 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
 
 ## 5. Creación de un proyecto Maven en Eclipse
 - Descarga en la carpeta de nuetro proyecto se encuentra en la subcarpeta de este repositorio nombrada como `p1-calso`. Esta carpeta contiene los archivos de proyecto Maven con el que trabajeremos en la práctica.
-- Crea een la carpeta de tu repositorio local (no en la del proyecto Maven) el fichero `.gitignore` con el siguiente contenido mínimo:
+- Crea, en la carpeta de tu repositorio local (no en la del proyecto Maven), el fichero `.gitignore` con el siguiente contenido:
 ```
 ### Eclipse ###
 .metadata
@@ -276,12 +303,12 @@ $RECYCLE.BIN/
 ## 6. Plugin de SonarQube para Eclipse
 Para trabajar en local con las **mismas reglas y configuraciones** que tengamos en SonarCloud, se utiliza el plugin oficial **SonarQube for IDE** (antes conocido como SonarLint).
 
-### 6.1. Instalación del pulgin
+### 6.1. Instalación del plugin
 - En Eclipse: **Help > Eclipse Marketplace…**.  
 - Buscar “SonarQube” e instalar **SonarQube for IDE**.  
 - Reiniciar Eclipse.
 
-### 3.2. Conexión con SonarCloud
+### 6.2. Conexión con SonarCloud
 1. En **Eclipse**, Ir a *Window > Preferences > SonarQube > Connected Mode*.  
 2. Crear una nueva conexión con **SonarCloud**.  
 3. Autenticarse con un token personal de SonarCloud.  
@@ -311,9 +338,9 @@ on:
 
 En función del análisis inicial del código el grupo de trabajo se repartirá el código de análisis y se procederá a el análisis de la resolución de disconformidades y su documentación, que se incorporará en un fichero `.md`. 
 
-Cada participante, cuando realice las acciones para resolver una disconformidad realizará un commit a su repositorio local y al concluir cada sesión de trabajo realizarán un push a su rama. Cuando ambos miembros concluiyan con la resolución de todas las disconformidades que aparecen en el código procederán a establecer los `pull request` necesarios para unificar todos las acciones en la rama `maiin` donde se configurará la entrega final.
+Cada participante, cuando realice las acciones para resolver una disconformidad realizará un commit a su repositorio local y al concluir cada sesión de trabajo realizarán un push a su rama. Cuando ambos miembros concluiyan con la resolución de todas las disconformidades que aparecen en el código procederán a establecer los `pull request` necesarios para unificar todos las acciones en la rama `main` donde se configurará la entrega final.
 
-IMPORTANTE: para la entrega de la práctica se deben haber resuelto la totaidad de las disconformidades y haber realizado la documentación de la disconformidad encontrada, su descripción, su localización en el código original y las moodificaciones realizadas para su solución (No está permitida la eliminación de funcionalidad para la corrección de disconformidades). Toda esta documentación de organizará en uno o varios archivos `.md`  de la rama `main` que se organizarán según las clases del proyecto original.
+IMPORTANTE: para la entrega de la práctica se deben haber resuelto la totalidad de las disconformidades y haber realizado la documentación de la disconformidad encontrada, su descripción, su localización en el código original y las modificaciones realizadas para su solución (No está permitida la eliminación de funcionalidad para la corrección de disconformidades). Toda esta documentación de organizará en uno o varios archivos `.md`  de la rama `main` que se organizarán según las clases del proyecto original.
 
 ## 8. Ejercicios a realizar
 
@@ -360,27 +387,32 @@ Para consolidar los conocimientos de la práctica, cada grupo deberá completar 
 - Verificar en la rama main que se han resuelto todas las disconformidades detectadas originalmente.
 - Asegurar que los ficheros .md de documentación estén completos y actualizados en la rama main.
 
-# 9. Entregables
+## 9. Entregables
 Al entregar la tarea en el aula virtual se indicará el enlace al repositorio de GitHub que contendrá, en la rama main: el proyecto completo, la documentación solicitada en el archivo `.md`, la identificación de los miembros del grupo en el archivo `README.md` y, en las ramas personales de cada participante la información sobre los commits/PR realizados por cada participante junto con su versión de la documentación.
-Fecha de entrega: 10/11/2025
 
-# 10. Evaluación
+**IMPORTANTE:** El profesor debe tener acceso tanto al repositorio como a la organización en la que se configuren los proyectos SonarQube con la cuenta de usuario indicada en el enunciado de la tarea asociada a la práctica en el aula virtual.
+
+**Fecha de entrega máxima:** 10/11/2025
+
+## 10. Evaluación
 
 **IMPORTANTE:** Si el profesor no pudiera acceder al repositorio o al proyecto de SonarCloud desde la cuenta indicada en el enunciado de la tarea asociada a la práctica en el aula virtual, se considerará la práctica como no superada con puntuación 0 puntos.
 
 La práctica se considerará superada si se cumplen los siguientes criterios:
 
 #### 1. Configuración y entorno (2 puntos)
+- [ ] Se ha creado correctamente el repositorio privado en GitHub.
 - [ ] Se ha creado correctamente la organización en SonarCloud vinculada con GitHub.  
-- [ ] El proyecto Maven se ha importado en Eclipse y compila sin errores.  
+- [ ] Se ha añadido al profesor en el repositorio de GitHub y en la organización de SonarCloud con la cuenta indicada en la tarea del aula virtual asociada a la práctica. 
 - [ ] El workflow de GitHub Actions (`build.yml`) ejecuta los análisis automáticamente al hacer *push* en las ramas configuradas.  
 
 #### 2. Análisis estático (3 puntos)
 - [ ] Se han detectado y documentado las disconformidades iniciales en el código.  
-- [ ] El análisis de SonarCloud muestra métricas de *bugs* vulnerabilidades y *code smells*.  
+- [ ] El análisis de SonarCloud muestra métricas de *bugs*, vulnerabilidades y *code smells*.  
 
 #### 3. Resolución de disconformidades (3 puntos)
-- [ ] Cada miembro del grupo ha trabajado en su rama individual.  
+- [ ] Cada miembro del grupo ha trabajado en su rama individual.
+- [ ] El trabajo de los miembros del grupo se ha equilibrado de forma que sus miembros han realizado un trabajo equitativo.   
 - [ ] Se han realizado modificaciones en el código resolviendo las disconformidades sin eliminar funcionalidad.  
 - [ ] Los *pull requests* se han integrado correctamente en `main`, reduciendo a cero las disconformidades reportadas.  
 
