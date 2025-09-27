@@ -2,6 +2,7 @@
 
 ## Índice
 
+- [0. Requisitos previos](#0-requisitos-previos)
 - [1. Objetivo](#1-objetivo)
 - [2. Introducción a las revisiones estáticas de código](#2-introducción-a-las-revisiones-estáticas-de-código)
 - [3. SonarQube Cloud: concepto y creación de una cuenta gratuita](#3-sonarqube-cloud-concepto-y-creación-de-una-cuenta-gratuita)
@@ -25,6 +26,67 @@
 - [9. Entregables](#9-entregables)
 - [10. Evaluación](#10-evaluación)
 
+## 0. Requisitos previos
+Antes de comenzar la práctica, cada alumno debe tener instalado y configurado en su equipo:
+
+  - Java 17 (JDK) o posterior.
+  - Eclipse IDE versión 2021-12 o posterior.
+  - Maven (se puede comprobar con mvn -v).
+  - Git (se puede comprobar con git --version).
+  - Cuenta en GitHub.
+
+Además, es recomendable configurar Git con nombre y correo global (si trabajas en tu propia máquina):
+
+```
+git config --global user.name "TuNombre"
+git config --global user.email "tuemail@dominio.com"
+
+```
+⚠️ **Importante si trabajas en un laboratorio compartido:**
+Si usas un ordenador al que acceden más personas, **no uses la opción `--global`** al configurar Git, ya que el nombre y el correo quedarán guardados para todos los usuarios de ese equipo.
+
+En su lugar, configura Git solo para tu repositorio local:
+
+```bash
+git config user.name "TuNombre"
+git config user.email "tuemail@dominio.com"
+```
+Esto guardará los datos de usuario solo en ese repositorio.
+Cuando termines la sesión, recuerda cerrar tu sesión de GitHub en el navegador y borrar cualquier credencial guardada en el sistema para evitar que otros usen tu identidad.
+
+**Gestión de credenciales en equipos compartidos**
+
+Cuando uses un ordenador compartido, es fundamental borrar las credenciales de GitHub al terminar tu sesión para evitar que otros puedan hacer push en tu nombre.
+
+  - **Windows**
+
+    1. Abre el menú de inicio y busca Administrador de credenciales.
+    2. Entra en Credenciales de Windows.
+    3. Busca entradas relacionadas con git: o github.com.
+    4. Selecciónalas y pulsa Quitar.
+
+  - **macOS**
+    1. Abre la aplicación Acceso a llaveros (Keychain Access).
+    2. Busca github.com.
+    3. Selecciona las credenciales almacenadas y bórralas.
+
+  - **Linux**
+    - Si usas el helper de credenciales de Git (cache o store), puedes limpiar con:
+    ```bash
+    git credential-cache exit
+    git credential-cache --timeout=1
+    git credential reject
+    ```
+    - Si usas ~/.git-credentials (modo store), edita o borra ese fichero:
+    ```bash
+    nano ~/.git-credentials
+    # elimina la línea con https://usuario:token@github.com
+    rm ~/.git-credentials  # si quieres borrarlo completo
+    ```
+**En todos los casos**
+
+  - Cierra la sesión en https://github.com desde el navegador.
+  - Si usaste un **token personal (PAT)**, recuerda que puedes revocarlo desde tu perfil de GitHub: *Settings > Developer settings > Personal access tokens*.
 
 ## 1. Objetivo
 Introducir el uso de herramientas de análisis estático de código y su integración en el flujo de desarrollo de software, utilizando SonarQube Cloud como plataforma principal.
