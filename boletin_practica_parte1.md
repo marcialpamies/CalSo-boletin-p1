@@ -25,7 +25,7 @@
   - [6. Integración final](#6-integración-final)
 - [9. Entregables](#9-entregables)
 - [10. Evaluación](#10-evaluación)
-- [11. FAQ: errores comunes](#11-FAQ:-errores-comunes)
+- [11. FAQ: errores comunes](#11-FAQ-errores-comunes)
 
 ## 0. Requisitos previos
 Antes de comenzar la práctica, cada alumno debe tener instalado y configurado en su equipo:
