@@ -25,6 +25,7 @@
   - [6. Integración final](#6-integración-final)
 - [9. Entregables](#9-entregables)
 - [10. Evaluación](#10-evaluación)
+- [11. FAQ: errores comunes](#11-FAQ:-errores-comunes)
 
 ## 0. Requisitos previos
 Antes de comenzar la práctica, cada alumno debe tener instalado y configurado en su equipo:
@@ -103,6 +104,8 @@ Entre los beneficios de la revisión estática destacan:
 
 La automatización de este proceso es posible gracias a herramientas como **SonarQube**, que integran motores de análisis estático con la posibilidad de establecer métricas de calidad y gates (umbrales mínimos que el código debe cumplir antes de ser aceptado).
 
+En esta práctica llamaremos **disconformidades** a los issues (problemas) detectados por SonarCloud: bugs, vulnerabilidades o code smells.
+
 ---
 
 ## 3. SonarQube Cloud: concepto y creación de una cuenta gratuita
@@ -157,7 +160,7 @@ Para automatizar el análisis en cada interacción con **GitHub**, necesitamos v
    mkdir .github/workflows
    touch .github/workflows/build.yml
    ```
-   - Copiar, en el archivo `.github/workflows/build.yml`, el contenido indicado, para un proyecto Maven, en el paso 2 de la configuración de SonarCloud (ver imagen siguiente).
+   - Copiar, en el archivo `.github/workflows/build.yml`, el contenido indicado, para un proyecto Maven, en el paso 2 de la configuración de SonarCloud (ver imagen siguiente). Un ***workflow*** es un fichero YAML de **GitHub Actions** que define qué pasos se ejecutan automáticamente cuando haces un push o pull request.
    - **IMPORTANTE:** Si en nuestro repositorio tenemos el proyecto maven (archivo pom.xml) dentro de una carpeta contenida en el repositorio (el archivo `pom.xml` no está en el directorio raiz de nuestro repositorio), por ejemplo en la carpeta `carpeta-poroy`, tendremos que añadir a la ejecución de maven la siguiente opción: `-f carpeta-proy/pom.xml`con el fin de que la acción encuentre el archivo del proyecto.
 
   ![Configuración de un workflow en GitHub Actions](imagenes/04_practica_01.png)
@@ -381,7 +384,28 @@ De este modo, Eclipse descarga el **Quality Profile** activo en SonarCloud y lo 
 ---
 ## 7. Forma de trabajo
 
-Cada miembro del grupo trabajará sobre su propia rama del repositorio de trabajo del grupo. Tened en cuenta que para ejecutar el workflow al hacer `push` o `pull request` en cada rama (por defecto sólo estará en la rama `main`) hay que indicar en el build.yml que así lo queremos. En el siguiente código mínimo se indica la forma:
+Cada miembro del grupo trabajará sobre su propia rama del repositorio de trabajo del grupo. 
+
+```mermaid
+flowchart TD
+    A[main]
+    B[rama_user_A]
+    C[rama_user_B]
+    Bc[Commits A]
+    Cc[Commits B]
+    Bp[Push rama_A]
+    Cp[Push rama_B]
+    PRa[Pull Request A]
+    PRb[Pull Request B]
+    M[Merge a main]
+
+    A --> B
+    A --> C
+    B --> Bc --> Bp --> PRa --> M
+    C --> Cc --> Cp --> PRb --> M
+```
+
+Tened en cuenta que para ejecutar el workflow al hacer `push` o `pull request` en cada rama (por defecto sólo estará en la rama `main`) hay que indicar en el build.yml que así lo queremos. En el siguiente código mínimo se indica la forma:
 
 ```
 on:
@@ -483,4 +507,10 @@ La práctica se considerará superada si se cumplen los siguientes criterios:
 - [ ] Cada documento incluye: localización, descripción y modificación aplicada.  
 - [ ] La documentación final está organizada y accesible en la rama `main`.  
 
+## 11. FAQ: errores comunes
 
+- `mvn`: command not found → Maven no está instalado o no está en el PATH.
+- POM file not found → Asegúrate de usar `-f carpeta/pom.xml` si tu proyecto está en subcarpeta.
+- **Error** refname `refs/heads/master not found` **al renombrar rama** → tu rama inicial ya se llama `main`. No necesitas renombrar.
+- **Error 403 en GitHub Actions al hacer commit automático** → añade un *Personal Access Token (PAT)* o revisa permisos de `GITHUB_TOKEN`.
+- **Conflictos al hacer* `git pull` → abre los archivos marcados con `<<<<<<<`, elige qué cambios conservar, guarda, `git add`, y ejecuta `git rebase --continue`.
