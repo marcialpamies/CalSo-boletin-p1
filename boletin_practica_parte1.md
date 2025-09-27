@@ -513,4 +513,4 @@ La práctica se considerará superada si se cumplen los siguientes criterios:
 - POM file not found → Asegúrate de usar `-f carpeta/pom.xml` si tu proyecto está en subcarpeta.
 - **Error** refname `refs/heads/master not found` **al renombrar rama** → tu rama inicial ya se llama `main`. No necesitas renombrar.
 - **Error 403 en GitHub Actions al hacer commit automático** → añade un *Personal Access Token (PAT)* o revisa permisos de `GITHUB_TOKEN`.
-- **Conflictos al hacer* `git pull` → abre los archivos marcados con `<<<<<<<`, elige qué cambios conservar, guarda, `git add`, y ejecuta `git rebase --continue`.
+- **Conflictos al hacer** `git pull` → abre los archivos marcados con `<<<<<<<`, elige qué cambios conservar, guarda, `git add`, y ejecuta `git rebase --continue`.
